@@ -28,7 +28,9 @@
 		'-8': 'y', // ycoto
 	}
 
-	var prettyBytes = function (num) {
+	var si = {}
+
+	si.compute = function (num) {
 		if (typeof num !== 'number' || Number.isNaN(num)) {
 			throw new TypeError('Input must be a number');
 		}
@@ -65,8 +67,8 @@
 	};
 
 	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = prettyBytes;
+		module.exports = si;
 	} else {
-		window.prettyBytes = prettyBytes;
+		window.SI = si;
 	}
 })();

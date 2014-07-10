@@ -1,6 +1,6 @@
 'use strict';
 var assert = require('assert');
-var pb = require('./pretty-bytes');
+var SI = require('./si');
 
 // it('should throw on invalid input', function () {
 // 	assert.throws(function () { pb('') });
@@ -62,7 +62,7 @@ it('si', function () {
 	// testCase(1337e16)
 
 	function testCase(num, expected) {
-		var si = pb(num)
+		var si = SI.compute(num)
 		var str = si.number.toFixed(5).replace(/0+$/, '') + si.prefix
 
 		console.log(si.input, '-->', si.number, si.prefix, '-->', str)
