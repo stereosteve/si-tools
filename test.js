@@ -2,27 +2,8 @@
 var assert = require('assert');
 var SI = require('./si');
 
-// it('should throw on invalid input', function () {
-// 	assert.throws(function () { pb('') });
-// 	assert.throws(function () { pb('1') });
-// 	assert.throws(function () { pb(NaN) });
-// 	assert.throws(function () { pb(true) });
-// });
-//
-// it('should convert bytes to human readable strings', function () {
-// 	assert.equal(pb(0), '0 B');
-// 	assert.equal(pb(10), '10 B');
-// 	assert.equal(pb(999), '999 B');
-// 	assert.equal(pb(1001), '1 kB');
-// 	assert.equal(pb(1001), '1 kB');
-// 	assert.equal(pb(9999999999999999), '10 PB');
-// });
-//
-// it('should support negative number', function () {
-// 	assert.equal(pb(-999), '-999 B');
-// });
 
-it('si', function () {
+it('Formats SI numbers', function () {
 	testCase(1337e-16, "133.7f")
 	testCase(1337e-15, "1.337p")
 	testCase(1337e-14, "13.37p")
@@ -67,5 +48,53 @@ it('si', function () {
 
 		console.log(si.input, '-->', si.number, si.prefix, '-->', str)
 		assert.equal(str, expected)
+	}
+})
+
+
+it('Parses SI strings', function () {
+
+	parseTest('1.21GW', {
+		number: 1210,
+		prefix: 'G',
+		unit: 'W'
+	})
+
+	parseTest('1.337 nM', {
+		number: 0.001337,
+		prefix: 'n',
+		unit: 'M'
+	})
+
+	parseTest('12 W', {
+		number: 12,
+		prefix: undefined,
+		unit: 'W'
+	})
+
+	parseTest('12 µF', {
+		number: 0.12,
+		prefix: 'µ',
+		unit: 'F'
+	})
+
+	parseTest('12 uF', {
+		number: 0.12,
+		prefix: 'µ',
+		unit: 'F'
+	})
+
+	// favors prefix over unit.
+	// this will be parsed as Mega, not Meters
+	parseTest('12 M', {
+		number: 1200,
+		prefix: 'M',
+		unit: ''
+	})
+
+	function parseTest(str, expected) {
+		var parsed = SI.parse(str)
+		console.log(parsed)
+		assert.deepEqual(parsed, expected)
 	}
 })

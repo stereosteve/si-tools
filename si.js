@@ -8,7 +8,7 @@
 (function () {
 	'use strict';
 
-	var siPrefixTable = {
+	var exponentTable = {
 		8:    'Y', // yotta
 		7:    'Z', // zetta
 		6:    'E', // exa
@@ -25,10 +25,26 @@
 		'-5': 'f', // femto
 		'-6': 'a', // atto
 		'-7': 'z', // zepto
-		'-8': 'y', // ycoto
+		'-8': 'y'  // ycoto
+	};
+
+	var prefixTable = {};
+
+	for (var exp in exponentTable) {
+		if (exponentTable.hasOwnProperty(exp)) {
+			var prefix = exponentTable[exp];
+			if (prefix.length === 0) {
+				continue;
+			}
+			prefixTable[prefix] = exp;
+		}
 	}
 
-	var si = {}
+	// alias u -> µ
+	prefixTable.u = prefixTable['µ'];
+
+
+	var si = {};
 
 	si.compute = function (num) {
 		if (typeof num !== 'number' || Number.isNaN(num)) {
@@ -38,7 +54,6 @@
 		var input = num;
 		var exponent;
 		var prefix;
-		var unit;
 		var neg = num < 0;
 
 		if (neg) {
@@ -50,19 +65,41 @@
 				input: input,
 				number: num,
 				prefix: '',
-			}
+			};
 		}
 
 		exponent = Math.floor(Math.log(num) / Math.log(1000));
-		prefix = siPrefixTable[exponent];
+		prefix = exponentTable[exponent];
 		num = (num / Math.pow(1000, exponent));
 
-		if (neg) num *= -1
+		if (neg) {
+			num *= -1;
+		}
 
 		return {
 			input: input,
 			number: num,
 			prefix: prefix,
+		};
+	};
+
+	si.parse = function(str) {
+		var num = parseFloat(str);
+		var unit = str.replace(num, '').trim();
+		var prefix;
+		var exp = prefixTable[unit[0]];
+		if (exp) {
+			num = num * Math.pow(10, exp);
+			prefix = unit[0];
+			unit = unit.substr(1);
+		}
+		if (prefix && prefix === 'u') {
+			prefix = 'µ';
+		}
+		return {
+			number: num,
+			prefix: prefix,
+			unit: unit
 		};
 	};
 
