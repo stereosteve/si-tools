@@ -1,3 +1,7 @@
+Work in progress fork of pretty-bytes generalized for SI formatting and parsing.
+
+---
+
 # pretty-bytes [![Build Status](https://travis-ci.org/sindresorhus/pretty-bytes.svg?branch=master)](https://travis-ci.org/sindresorhus/pretty-bytes)
 
 > Convert bytes to a human readable string: `1337` → `1.34 kB`
