@@ -4,6 +4,7 @@ var SI = require('./si');
 
 
 it('Formats SI numbers', function () {
+
 	testCompute(1337e-16, "133.7f")
 	testCompute(1337e-15, "1.337p")
 	testCompute(1337e-14, "13.37p")
@@ -42,6 +43,9 @@ it('Formats SI numbers', function () {
 	testCompute(1337e15, "1.337E")
 	testCompute(1337e16, "13.37E")
 
+	// negative
+	testCompute(-1337e-7, "-133.7µ")
+
 	function testCompute(num, expected) {
 		var si = SI.compute(num)
 		var str = si.number.toFixed(5).replace(/\.?0+$/, '') + si.prefix
@@ -55,13 +59,13 @@ it('Formats SI numbers', function () {
 it('Parses SI strings', function () {
 
 	testParse('1.21GW', {
-		number: 1210,
+		number: 1210000000,
 		prefix: 'G',
 		unit: 'W'
 	})
 
 	testParse('1.337 nM', {
-		number: 0.001337,
+		number: 1.337e-9,
 		prefix: 'n',
 		unit: 'M'
 	})
@@ -72,14 +76,35 @@ it('Parses SI strings', function () {
 		unit: 'W'
 	})
 
+	// aliases
 	testParse('12 µF', {
-		number: 0.12,
+		number: 0.000012,
 		prefix: 'µ',
 		unit: 'F'
 	})
 
 	testParse('12 uF', {
-		number: 0.12,
+		number: 0.000012,
+		prefix: 'µ',
+		unit: 'F'
+	})
+
+	testParse('12 kM', {
+		number: 12000,
+		prefix: 'k',
+		unit: 'M'
+	})
+
+	testParse('12 KM', {
+		number: 12000,
+		prefix: 'k',
+		unit: 'M'
+	})
+
+
+	// negative
+	testParse('-12 uF', {
+		number: -0.000012,
 		prefix: 'µ',
 		unit: 'F'
 	})
@@ -87,7 +112,7 @@ it('Parses SI strings', function () {
 	// favors prefix over unit.
 	// this will be parsed as Mega, not Meters
 	testParse('12 M', {
-		number: 1200,
+		number: 12000000,
 		prefix: 'M',
 		unit: ''
 	})

@@ -40,8 +40,15 @@
 		}
 	}
 
-	// alias u -> µ
-	prefixTable.u = prefixTable['µ'];
+	var aliasTable = {
+		'u': 'µ',
+		'K': 'k'
+	}
+
+	for (var alias in aliasTable) {
+		var key = aliasTable[alias]
+		prefixTable[alias] = prefixTable[key];
+	}
 
 
 	var si = {};
@@ -89,12 +96,13 @@
 		var prefix;
 		var exp = prefixTable[unit[0]];
 		if (exp) {
-			num = num * Math.pow(10, exp);
+			num = num * Math.pow(1000, exp);
 			prefix = unit[0];
 			unit = unit.substr(1);
 		}
-		if (prefix && prefix === 'u') {
-			prefix = 'µ';
+		// if alias, use the proper prefix
+		if (prefix && aliasTable[prefix]) {
+			prefix = aliasTable[prefix];
 		}
 		return {
 			number: num,
