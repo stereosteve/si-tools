@@ -51,9 +51,9 @@
 	}
 
 
-	var si = {};
+	var SI = {};
 
-	si.compute = function (num) {
+	SI.compute = function (num) {
 		if (typeof num !== 'number' || Number.isNaN(num)) {
 			throw new TypeError('Input must be a number');
 		}
@@ -90,7 +90,21 @@
 		};
 	};
 
-	si.parse = function(str) {
+	SI.format = function (number, unit, separator) {
+		var si = SI.compute(number);
+		var parts = [
+			si.number.toFixed(5).replace(/\.?0+$/, ''),
+			separator,
+			si.prefix,
+			unit,
+		]
+		var str =  parts.join('')
+		console.log(si)
+		console.log(str)
+		return str;
+	}
+
+	SI.parse = function(str) {
 		var num = parseFloat(str);
 		var unit = str.replace(num, '').trim();
 		var prefix;
@@ -112,8 +126,8 @@
 	};
 
 	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = si;
+		module.exports = SI;
 	} else {
-		window.SI = si;
+		window.SI = SI;
 	}
 })();

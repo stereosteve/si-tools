@@ -5,6 +5,9 @@ var SI = require('./si');
 
 it('Formats SI numbers', function () {
 
+	assert.equal(SI.format(1210000000, 'W'), '1.21GW')
+	assert.equal(SI.format(1210000000, 'W', ' '), '1.21 GW')
+
 	testCompute(1337e-16, "133.7f")
 	testCompute(1337e-15, "1.337p")
 	testCompute(1337e-14, "13.37p")
@@ -48,7 +51,7 @@ it('Formats SI numbers', function () {
 
 	function testCompute(num, expected) {
 		var si = SI.compute(num)
-		var str = si.number.toFixed(5).replace(/\.?0+$/, '') + si.prefix
+		var str = SI.format(num)
 
 		console.log(si.input, '-->', si.number, si.prefix, '-->', str)
 		assert.equal(str, expected)

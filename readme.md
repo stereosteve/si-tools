@@ -1,57 +1,45 @@
-Work in progress fork of pretty-bytes generalized for SI formatting and parsing.
+# si-tools [![Build Status](https://travis-ci.org/stereosteve/si-tools.svg?branch=master)](https://travis-ci.org/stereosteve/si-tools)
 
----
-
-# pretty-bytes [![Build Status](https://travis-ci.org/sindresorhus/pretty-bytes.svg?branch=master)](https://travis-ci.org/sindresorhus/pretty-bytes)
-
-> Convert bytes to a human readable string: `1337` → `1.34 kB`
-
-Useful for displaying file sizes for humans.
-
--
-
-*Note that it uses base-10 (eg. kilobyte).  
-[Read about the difference between kilobyte and kibibyte.](http://pacoup.com/2009/05/26/kb-kb-kib-whats-up-with-that/)*
+> Parsing and Formatting of SI numbers:
 
 
 ## Install
 
 ```sh
-$ npm install --save pretty-bytes
+$ npm install --save si-tools
 ```
 
 ```sh
-$ bower install --save pretty-bytes
+# TODO
+$ bower install --save si-tools
 ```
 
 ```sh
-$ component install sindresorhus/pretty-bytes
+# TODO
+$ component install stereosteve/si-tools
 ```
 
 
 ## Usage
 
 ```js
-prettyBytes(1337);
-//=> '1.34 kB'
+SI.format(1210000000, 'W')
+//=> '1.21GW'
 
-prettyBytes(100);
-//=> '100 B'
+SI.parse('1.21GW')
+//=> { number: 1210000000,
+//     prefix: 'G',
+//     unit: 'W' }
 ```
 
 
-## CLI
 
-```bash
-$ npm install --global pretty-bytes
-```
+## Credits
 
-```bash
-$ pretty-bytes 1337
-1.34 kB
-```
+* Forked from Snidre Sorhus' [pretty-bytes](https://github.com/sindresorhus/pretty-bytes) module.
+  Adapted to work with SI numbers.
 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Steve Perkins](http://www.stereosteve.com)
