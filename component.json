@@ -1,11 +1,11 @@
 {
-  "name": "pretty-bytes",
+  "name": "si-tools",
   "version": "0.1.1",
-  "description": "Convert bytes to a human readable string: 1337 → 1.34 kB",
+  "description": "Parsing and Formatting of SI numbers: `SI.format(0.000005, 'M')` → `'5µM'`",
   "license": "MIT",
-  "repository": "sindresorhus/pretty-bytes",
-  "main": "pretty-bytes.js",
-  "scripts": ["pretty-bytes.js"],
+  "repository": "stereosteve/si-tools",
+  "main": "si.js",
+  "scripts": ["si.js"],
   "keywords": [
     "pretty",
     "bytes",

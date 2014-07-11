@@ -14,7 +14,6 @@ $ bower install --save si-tools
 ```
 
 ```sh
-# TODO
 $ component install stereosteve/si-tools
 ```
 
