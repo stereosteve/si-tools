@@ -1,13 +1,13 @@
 {
-  "name": "pretty-bytes",
-  "description": "Convert bytes to a human readable string: 1337 → 1.34 kB",
+  "name": "si-tools",
+  "description": "Parsing and Formatting of SI numbers: `SI.format(0.000005, 'M')` → `'5µM'`",
   "license": "MIT",
-  "main": "pretty-bytes.js",
+  "main": "si.js",
   "authors": [
     {
-      "name": "Sindre Sorhus",
-      "email": "sindresorhus@gmail.com",
-      "url": "http://sindresorhus.com"
+      "name": "Steve Perkins",
+      "email": "stereosteve@gmail.com",
+      "url": "http://www.stereosteve.com"
     }
   ],
   "keywords": [
@@ -26,7 +26,6 @@
   "ignore": [
     ".*",
     "test.js",
-    "cli.js",
     "component.json",
     "package.json"
   ]

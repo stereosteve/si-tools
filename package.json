@@ -1,7 +1,7 @@
 {
   "name": "si-tools",
   "version": "0.1.1",
-  "description": "Parsing and Formatting of SI numbers",
+  "description": "Parsing and Formatting of SI numbers: `SI.format(0.000005, 'M')` → `'5µM'`",
   "license": "MIT",
   "repository": "stereosteve/si-tools",
   "main": "si.js",

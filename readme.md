@@ -1,6 +1,6 @@
 # si-tools [![Build Status](https://travis-ci.org/stereosteve/si-tools.svg?branch=master)](https://travis-ci.org/stereosteve/si-tools)
 
-> Parsing and Formatting of SI numbers:
+> Parsing and Formatting of SI numbers: `SI.format(0.000005, 'M')` → `'5µM'`
 
 
 ## Install
@@ -10,7 +10,6 @@ $ npm install --save si-tools
 ```
 
 ```sh
-# TODO
 $ bower install --save si-tools
 ```
 
