@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>si-tools</title>
+		<script src="si.js"></script>
+		<link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+
+		<div class="jumbotron">
+			<div class="container">
+				<h1>si-tools</h1>
+				<p>Parsing and Formatting of SI numbers.</p>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<h2>Formatting</h2>
+
+			<div class="form-inline">
+				<div class="input-group">
+					<label>Number</label>
+					<input id="formatNumber" type="text" value="0.000005" onkeyup="demoFormat()" class="form-control">
+				</div>
+				<div class="input-group">
+					<label>Unit</label>
+					<input id="formatUnit" type="text" value="m" onkeyup="demoFormat()" class="form-control">
+				</div>
+				<div class="input-group">
+					<label>Separator</label>
+					<input id="formatSeparator" type="text" value=" " onkeyup="demoFormat()" class="form-control">
+				</div>
+			</div>
+
+			<br />
+			<label>Output</label>
+			<pre id="formatOutput">formatOutput</pre>
+
+		</div>
+
+		<br />
+		<hr />
+		<br />
+
+		<div class="container">
+
+			<h2>Parsing</h2>
+			<label>Input</label>
+			<input id="demo1input" type="text" value="1.21GW" onkeyup="demo1()" class="form-control">
+
+			<br />
+			<label>Output</label>
+			<pre id="demo1pre">demo</pre>
+
+		</div>
+
+		<br />
+		<hr />
+		<br />
+
+		<div class="container">
+			<a href="https://github.com/stereosteve/si-tools">code</a>
+		</div>
+
+		<br />
+		<br />
+		<br />
+
+		<script>
+		function demoFormat() {
+			var formatted = ' '
+			var number = parseFloat(formatNumber.value, 10)
+			var unit = formatUnit.value
+			var separator = formatSeparator.value
+			if (number) formatted = SI.format(number, unit, separator)
+			formatOutput.innerText = formatted
+		}
+
+		function demo1() {
+			var input = demo1input.value
+			var parsed = SI.parse(input)
+			demo1pre.innerText = JSON.stringify(parsed, undefined, 2)
+		}
+
+		demo1()
+		demoFormat()
+		</script>
+
+	</body>
+</html>
