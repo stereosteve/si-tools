@@ -99,8 +99,6 @@
 			unit,
 		]
 		var str =  parts.join('')
-		console.log(si)
-		console.log(str)
 		return str;
 	}
 
