@@ -13,6 +13,17 @@
 		return val !== val;
 	};
 
+	// String trim polyfill
+	if (!String.prototype.trim) {
+		(function(){
+			// Make sure we trim BOM and NBSP
+			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+			String.prototype.trim = function () {
+				return this.replace(rtrim, "");
+			}
+		})();
+	}
+
 	var exponentTable = {
 		8:    'Y', // yotta
 		7:    'Z', // zetta
