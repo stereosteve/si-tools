@@ -8,6 +8,11 @@
 (function () {
 	'use strict';
 
+	// Number.isNaN() polyfill
+	var isNaN = function (val) {
+		return val !== val;
+	};
+
 	var exponentTable = {
 		8:    'Y', // yotta
 		7:    'Z', // zetta
@@ -54,7 +59,7 @@
 	var SI = {};
 
 	SI.compute = function (num) {
-		if (typeof num !== 'number' || Number.isNaN(num)) {
+		if (typeof num !== 'number' || isNaN(num)) {
 			throw new TypeError('Input must be a number');
 		}
 
