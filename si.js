@@ -43,10 +43,10 @@
 	var aliasTable = {
 		'u': 'µ',
 		'K': 'k'
-	}
+	};
 
 	for (var alias in aliasTable) {
-		var key = aliasTable[alias]
+		var key = aliasTable[alias];
 		prefixTable[alias] = prefixTable[key];
 	}
 
@@ -71,7 +71,7 @@
 			return {
 				input: input,
 				number: num,
-				prefix: '',
+				prefix: ''
 			};
 		}
 
@@ -86,7 +86,7 @@
 		return {
 			input: input,
 			number: num,
-			prefix: prefix,
+			prefix: prefix
 		};
 	};
 
@@ -96,11 +96,11 @@
 			si.number.toFixed(5).replace(/\.?0+$/, ''),
 			separator,
 			si.prefix,
-			unit,
-		]
-		var str =  parts.join('')
+			unit
+		];
+		var str =  parts.join('');
 		return str;
-	}
+	};
 
 	SI.parse = function(str) {
 		var num = parseFloat(str);
