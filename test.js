@@ -27,6 +27,7 @@ it('Formats SI numbers', function () {
 
 	testCompute(0, "0")
 	testCompute(1337, "1.337k")
+	testCompute("1337", "1.337k")
 	testCompute(1337e0, "1.337k")
 
 	testCompute(1337e1, "13.37k")
@@ -53,7 +54,7 @@ it('Formats SI numbers', function () {
 		var si = SI.compute(num)
 		var str = SI.format(num)
 
-		console.log(si.input, '-->', si.number, si.prefix, '-->', str)
+		// console.log(si.input, '-->', si.number, si.prefix, '-->', str)
 		assert.equal(str, expected)
 	}
 })
@@ -122,7 +123,15 @@ it('Parses SI strings', function () {
 
 	function testParse(str, expected) {
 		var parsed = SI.parse(str)
-		console.log(parsed)
+		// console.log(parsed)
 		assert.deepEqual(parsed, expected)
+	}
+})
+
+it('throws error on invalid input', function() {
+	try {
+		SI.format('some string')
+	} catch(e) {
+		assert.equal(e.message, 'si-tools: input must be a number')
 	}
 })

@@ -70,9 +70,8 @@
 	var SI = {};
 
 	SI.compute = function (num) {
-		if (typeof num !== 'number' || isNaN(num)) {
-			throw new TypeError('Input must be a number');
-		}
+		if (typeof num !== 'number') num = parseFloat(num);
+		if (isNaN(num)) throw new TypeError('si-tools: input must be a number');
 
 		var input = num;
 		var exponent;
