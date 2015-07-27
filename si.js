@@ -110,11 +110,7 @@
 	};
 
 	SI.format = function (number, unit, separator, precision) {
-		try {
-			var si = SI.compute(number);
-		} catch(e) {
-			return number
-		}
+		var si = SI.compute(number);
 		if (!isNumeric(precision)) precision = 5
 		var parts = [
 			si.number.toFixed(precision).replace(/\.?0+$/, ''),
