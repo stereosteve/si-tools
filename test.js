@@ -135,3 +135,14 @@ it('throws error on invalid input', function() {
 		assert.equal(e.message, 'si-tools: input must be a number')
 	}
 })
+
+it('has option for separator', function() {
+	assert.equal(SI.format(1337e-12, 'F', ''), '1.337nF')
+	assert.equal(SI.format(1337e-12, 'F', ' '), '1.337 nF')
+})
+
+it('has option for precision', function() {
+	assert.equal(SI.format(1337e-12, 'F', '', 1), '1.3nF')
+	assert.equal(SI.format(1337e-12, 'F', '', 2), '1.34nF')
+	assert.equal(SI.format(1337e-12, 'F', '', 3), '1.337nF')
+})

@@ -13,6 +13,10 @@
 		return val !== val;
 	};
 
+	var isNumeric = function isNumber(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+
 	// String trim polyfill
 	if (!String.prototype.trim) {
 		(function(){
@@ -105,10 +109,15 @@
 		};
 	};
 
-	SI.format = function (number, unit, separator) {
-		var si = SI.compute(number);
+	SI.format = function (number, unit, separator, precision) {
+		try {
+			var si = SI.compute(number);
+		} catch(e) {
+			return number
+		}
+		if (!isNumeric(precision)) precision = 5
 		var parts = [
-			si.number.toFixed(5).replace(/\.?0+$/, ''),
+			si.number.toFixed(precision).replace(/\.?0+$/, ''),
 			separator,
 			si.prefix,
 			unit
