@@ -123,8 +123,14 @@
 	};
 
 	SI.parse = function(str) {
+		if (str.indexOf('.') == 0) {
+			str = '0' + str;
+		}
 		var num = parseFloat(str);
 		var unit = str.replace(num, '').trim();
+		if (unit.lastIndexOf('0') > -1) {
+			unit = unit.substr(unit.lastIndexOf('0') + 1)
+		}
 		var prefix;
 		var exp = prefixTable[unit[0]];
 		if (exp) {

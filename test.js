@@ -121,6 +121,20 @@ it('Parses SI strings', function () {
 		unit: ''
 	})
 
+	// handles numbers without leading 0
+	testParse('.1uF', {
+		number: 1e-7,
+		prefix: 'µ',
+		unit: 'F'
+	})
+
+	// handles numbers with trailing 0
+	testParse('0.100uF', {
+		number: 1e-7,
+		prefix: 'µ',
+		unit: 'F'
+	})
+
 	function testParse(str, expected) {
 		var parsed = SI.parse(str)
 		// console.log(parsed)
