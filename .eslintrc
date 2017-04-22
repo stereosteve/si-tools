@@ -4,6 +4,9 @@
       "browser": true
   },
   "rules": {
-    "quotes": [2, "single"]
+    "quotes": [2, "single"],
+    "no-native-reassign": 0,
+    "no-extend-native": 0,
+    "curly": 0
   }
 }

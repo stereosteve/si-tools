@@ -15,7 +15,7 @@
 
 	var isNumeric = function isNumber(n) {
 		return !isNaN(parseFloat(n)) && isFinite(n);
-	}
+	};
 
 	// String trim polyfill
 	if (!String.prototype.trim) {
@@ -23,8 +23,8 @@
 			// Make sure we trim BOM and NBSP
 			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 			String.prototype.trim = function () {
-				return this.replace(rtrim, "");
-			}
+				return this.replace(rtrim, '');
+			};
 		})();
 	}
 
@@ -65,11 +65,19 @@
 		'K': 'k'
 	};
 
-	for (var alias in aliasTable) {
-		var key = aliasTable[alias];
+	var key, alias;
+
+	for (alias in aliasTable) {
+		key = aliasTable[alias];
 		prefixTable[alias] = prefixTable[key];
 	}
 
+	var allPrefixes = '';
+	for (key in prefixTable) {
+		allPrefixes += key;
+	}
+
+	var parseRegex = new RegExp('^([\-0-9.eE]+) ?([' + allPrefixes + '])?(.*)');
 
 	var SI = {};
 
@@ -111,7 +119,7 @@
 
 	SI.format = function (number, unit, separator, precision) {
 		var si = SI.compute(number);
-		if (!isNumeric(precision)) precision = 5
+		if (!isNumeric(precision)) precision = 5;
 		var parts = [
 			si.number.toFixed(precision).replace(/\.?0+$/, ''),
 			separator,
@@ -123,21 +131,21 @@
 	};
 
 	SI.parse = function(str) {
-		if (str.indexOf('.') == 0) {
-			str = '0' + str;
+
+		var num, prefix, unit;
+
+		var m = parseRegex.exec(str);
+		if (m) {
+			num = parseFloat(m[1]);
+			prefix = m[2];
+			unit = m[3];
 		}
-		var num = parseFloat(str);
-		var unit = str.replace(num, '').trim();
-		if (unit.lastIndexOf('0') > -1) {
-			unit = unit.substr(unit.lastIndexOf('0') + 1)
-		}
-		var prefix;
-		var exp = prefixTable[unit[0]];
+
+		var exp = prefixTable[prefix];
 		if (exp) {
 			num = num * Math.pow(1000, exp);
-			prefix = unit[0];
-			unit = unit.substr(1);
 		}
+
 		// if alias, use the proper prefix
 		if (prefix && aliasTable[prefix]) {
 			prefix = aliasTable[prefix];

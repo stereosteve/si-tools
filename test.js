@@ -135,6 +135,18 @@ it('Parses SI strings', function () {
 		unit: 'F'
 	})
 
+	testParse('1e12F', {
+		number: 1000000000000,
+		prefix: undefined,
+		unit: 'F'
+	})
+	testParse('1e12f', {
+		number: .001,
+		prefix: 'f',
+		unit: ''
+	})
+
+
 	function testParse(str, expected) {
 		var parsed = SI.parse(str)
 		// console.log(parsed)
