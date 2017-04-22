@@ -9,13 +9,6 @@
 $ npm install --save si-tools
 ```
 
-```sh
-$ bower install --save si-tools
-```
-
-```sh
-$ component install stereosteve/si-tools
-```
 
 
 ## Usage

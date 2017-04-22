@@ -145,6 +145,11 @@ it('Parses SI strings', function () {
 		prefix: 'f',
 		unit: ''
 	})
+	testParse('one two three', {
+		number: undefined,
+		prefix: undefined,
+		unit: undefined
+	})
 
 
 	function testParse(str, expected) {

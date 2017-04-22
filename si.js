@@ -1,8 +1,9 @@
 /*!
-	pretty-bytes
-	Convert bytes to a human readable string: 1337 → 1.34 kB
-	https://github.com/sindresorhus/pretty-bytes
-	by Sindre Sorhus
+	si-tools
+	Parsing and formatting of SI numbers SI.format(0.000005, 'M') → '5µM'
+	https://github.com/stereosteve/si-tools
+	forked from https://github.com/sindresorhus/pretty-bytes
+	by Steve Perkins, Sindre Sorhus
 	MIT License
 */
 (function () {
